@@ -14,7 +14,7 @@ var capsuledim = Vector2(0.25,0.4)
 var circledim = Vector2(0.3,0.3)
 
 var normal = Vector2(0, 0)
-export(float) var gravity = -normal * 9.8 * 10
+export(float) var gravity = 9.8*20
 var velocity = Vector2()
 var acceleration = Vector2()
 
@@ -27,14 +27,13 @@ func get_input():
 	if Input.is_action_pressed('ui_right'):
 		direction = FacingDir.Right
 		invelocity.x += 1
-		velocity.x += speed*cos(rotation)
 	if Input.is_action_pressed('ui_left'):
 		direction = FacingDir.Left
 		invelocity.x -= 1
 	if Input.is_action_pressed('jump') and isground:
 		isjumping = true
-	var vx = invelocity.x*speed*cos(rotation)
-	var vy = invelocity.x*speed*sin(rotation)
+	var vx = clamp(invelocity.x*speed*cos(rotation), -500,500)
+	var vy = clamp(invelocity.x*speed*sin(rotation),-500,500)
 	velocity.x += vx
 	velocity.y += vy
 	
@@ -50,21 +49,26 @@ func _physics_process(dt):
 	acceleration = Vector2()
 	get_input()
 	gravity = 9.8*20 
-	if not isground:
-		normal = Vector2(0,-1)
 	velocity += velocity.rotated(rotation)*dt
 	var pos = global_transform.origin
+	if isjumping and isground:
+		velocity = normal * 350
+	if isjumping and isground:
+		isjumping = false
 	if inslope:
 		acceleration += -normal*gravity
-		acceleration += Vector2(0,gravity*2)
-	else:
-		pass
-	if not isground and not inslope:
 		acceleration += Vector2(0,gravity)
 	else:
 		pass
 	
+	acceleration += Vector2(0,gravity)
+	
 	velocity += acceleration * dt
+	if isground:
+		velocity *= 0.85
+	else:
+		velocity *= 0.75
+		normal = Vector2(0,-1)
 	var collisioninfo = move_and_collide(velocity * dt)
 	var collisioncount = 0
 	while collisioninfo and collisioninfo.remainder.length() > 0.001 and collisioncount < 10: 
@@ -73,8 +77,6 @@ func _physics_process(dt):
 		collisioninfo = move_and_collide(collisioninfo.remainder)
 	var angle = -normal.angle_to(Vector2(0,-1))
 	rotation = angle
-	velocity *= 0.7
-	
 	if isjumping and velocity.y > 0:
 		isjumping = false
 	if !isground and isjumping:
@@ -89,12 +91,12 @@ func _physics_process(dt):
 				$Sprite.stop()
 				$Sprite.play("walk_left")
 			direction = FacingDir.Left
-		if round(velocity.x) != 0 and direction == FacingDir.Right:
+		elif round(velocity.x) != 0 and direction == FacingDir.Right:
 			if $Sprite.animation != "walk_right":
 				$Sprite.stop()
 				$Sprite.play("walk_right")
 			direction = FacingDir.Right
-		if round(velocity.x) == 0 :
+		else:
 			if direction == FacingDir.Left: 
 				if $Sprite.is_playing():
 					$Sprite.stop()

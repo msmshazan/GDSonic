@@ -12,24 +12,24 @@
 [ext_resource path="res://MoveRight/MoveRight-8.png" type="Texture" id=10]
 [ext_resource path="res://MoveRight/MoveRight-9.png" type="Texture" id=11]
 [ext_resource path="res://MoveRight/MoveRight-10.png" type="Texture" id=12]
-[ext_resource path="res://roll_right/0.png" type="Texture" id=13]
-[ext_resource path="res://roll_right/1.png" type="Texture" id=14]
-[ext_resource path="res://roll_right/2.png" type="Texture" id=15]
-[ext_resource path="res://roll_right/3.png" type="Texture" id=16]
-[ext_resource path="res://roll_right/4.png" type="Texture" id=17]
-[ext_resource path="res://roll_right/5.png" type="Texture" id=18]
-[ext_resource path="res://roll_right/6.png" type="Texture" id=19]
-[ext_resource path="res://MoveLeft/MoveLeft-1.png" type="Texture" id=20]
-[ext_resource path="res://MoveLeft/MoveLeft-2.png" type="Texture" id=21]
-[ext_resource path="res://MoveLeft/MoveLeft-3.png" type="Texture" id=22]
-[ext_resource path="res://MoveLeft/MoveLeft-4.png" type="Texture" id=23]
-[ext_resource path="res://MoveLeft/MoveLeft-5.png" type="Texture" id=24]
-[ext_resource path="res://MoveLeft/MoveLeft-6.png" type="Texture" id=25]
-[ext_resource path="res://MoveLeft/MoveLeft-7.png" type="Texture" id=26]
-[ext_resource path="res://MoveLeft/MoveLeft-8.png" type="Texture" id=27]
-[ext_resource path="res://MoveLeft/MoveLeft-9.png" type="Texture" id=28]
-[ext_resource path="res://MoveLeft/MoveLeft-10.png" type="Texture" id=29]
-[ext_resource path="res://StandRight/StandRight-1.png" type="Texture" id=30]
+[ext_resource path="res://MoveLeft/MoveLeft-1.png" type="Texture" id=13]
+[ext_resource path="res://MoveLeft/MoveLeft-2.png" type="Texture" id=14]
+[ext_resource path="res://MoveLeft/MoveLeft-3.png" type="Texture" id=15]
+[ext_resource path="res://MoveLeft/MoveLeft-4.png" type="Texture" id=16]
+[ext_resource path="res://MoveLeft/MoveLeft-5.png" type="Texture" id=17]
+[ext_resource path="res://MoveLeft/MoveLeft-6.png" type="Texture" id=18]
+[ext_resource path="res://MoveLeft/MoveLeft-7.png" type="Texture" id=19]
+[ext_resource path="res://MoveLeft/MoveLeft-8.png" type="Texture" id=20]
+[ext_resource path="res://MoveLeft/MoveLeft-9.png" type="Texture" id=21]
+[ext_resource path="res://MoveLeft/MoveLeft-10.png" type="Texture" id=22]
+[ext_resource path="res://StandRight/StandRight-1.png" type="Texture" id=23]
+[ext_resource path="res://roll_right/0.png" type="Texture" id=24]
+[ext_resource path="res://roll_right/1.png" type="Texture" id=25]
+[ext_resource path="res://roll_right/2.png" type="Texture" id=26]
+[ext_resource path="res://roll_right/3.png" type="Texture" id=27]
+[ext_resource path="res://roll_right/4.png" type="Texture" id=28]
+[ext_resource path="res://roll_right/5.png" type="Texture" id=29]
+[ext_resource path="res://roll_right/6.png" type="Texture" id=30]
 [ext_resource path="res://StandLeft/StandLeft-1.png" type="Texture" id=31]
 [ext_resource path="res://loop.png" type="Texture" id=32]
 [ext_resource path="res://RayCast2D.gd" type="Script" id=33]
@@ -43,31 +43,31 @@ animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "walk_right",
-"speed": 24.0
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ) ],
 "loop": true,
-"name": "roll_right",
+"name": "walk_left",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": false,
+"name": "stand_right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 24 ) ],
 "loop": true,
 "name": "jump",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ) ],
 "loop": true,
-"name": "walk_left",
-"speed": 24.0
+"name": "roll_right",
+"speed": 5.0
 }, {
 "frames": [  ],
 "loop": true,
 "name": "roll_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 30 ) ],
-"loop": false,
-"name": "stand_right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 31 ) ],
@@ -123,17 +123,18 @@ collision/safe_margin = 0.1
 script = ExtResource( 2 )
 _sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
 speed = 100.0
-gravity = null
+gravity = 196.0
 
 [node name="Sprite" type="AnimatedSprite" parent="Player" index="0"]
 position = Vector2( 0, 5 )
 scale = Vector2( 0.25, 0.4 )
 frames = SubResource( 1 )
-animation = "stand_left"
+animation = "stand_right"
 playing = true
 _sections_unfolded = [ "Animation", "Region", "Transform", "frames", "texture" ]
 
 [node name="Capsule" type="CollisionShape2D" parent="Player" index="1"]
+visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "shape" ]
@@ -164,6 +165,7 @@ editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
 [node name="Circle" type="CollisionShape2D" parent="Player" index="3"]
+visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 3 )
 disabled = true
@@ -234,21 +236,21 @@ script = ExtResource( 33 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="RayCast2D2" type="RayCast2D" parent="Loop" index="3"]
-position = Vector2( -112.165, 26.1224 )
+position = Vector2( -114.804, 5.22445 )
 scale = Vector2( 0.1, 1 )
 enabled = true
 exclude_parent = false
-cast_to = Vector2( 0, 30 )
+cast_to = Vector2( 0, 50 )
 collision_mask = 3
 script = ExtResource( 34 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="RayCast2D3" type="RayCast2D" parent="Loop" index="4"]
-position = Vector2( 109.526, 26.1224 )
+position = Vector2( 128, 5.22445 )
 scale = Vector2( 0.1, 1 )
 enabled = true
 exclude_parent = false
-cast_to = Vector2( 0, 30 )
+cast_to = Vector2( 0, 50 )
 collision_mask = 5
 script = ExtResource( 35 )
 _sections_unfolded = [ "Transform" ]
