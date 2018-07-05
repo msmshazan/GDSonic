@@ -1,0 +1,272 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://tilemap.tres" type="TileSet" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://MoveRight/MoveRight-1.png" type="Texture" id=3]
+[ext_resource path="res://MoveRight/MoveRight-2.png" type="Texture" id=4]
+[ext_resource path="res://MoveRight/MoveRight-3.png" type="Texture" id=5]
+[ext_resource path="res://MoveRight/MoveRight-4.png" type="Texture" id=6]
+[ext_resource path="res://MoveRight/MoveRight-5.png" type="Texture" id=7]
+[ext_resource path="res://MoveRight/MoveRight-6.png" type="Texture" id=8]
+[ext_resource path="res://MoveRight/MoveRight-7.png" type="Texture" id=9]
+[ext_resource path="res://MoveRight/MoveRight-8.png" type="Texture" id=10]
+[ext_resource path="res://MoveRight/MoveRight-9.png" type="Texture" id=11]
+[ext_resource path="res://MoveRight/MoveRight-10.png" type="Texture" id=12]
+[ext_resource path="res://roll_right/0.png" type="Texture" id=13]
+[ext_resource path="res://roll_right/1.png" type="Texture" id=14]
+[ext_resource path="res://roll_right/2.png" type="Texture" id=15]
+[ext_resource path="res://roll_right/3.png" type="Texture" id=16]
+[ext_resource path="res://roll_right/4.png" type="Texture" id=17]
+[ext_resource path="res://roll_right/5.png" type="Texture" id=18]
+[ext_resource path="res://roll_right/6.png" type="Texture" id=19]
+[ext_resource path="res://MoveLeft/MoveLeft-1.png" type="Texture" id=20]
+[ext_resource path="res://MoveLeft/MoveLeft-2.png" type="Texture" id=21]
+[ext_resource path="res://MoveLeft/MoveLeft-3.png" type="Texture" id=22]
+[ext_resource path="res://MoveLeft/MoveLeft-4.png" type="Texture" id=23]
+[ext_resource path="res://MoveLeft/MoveLeft-5.png" type="Texture" id=24]
+[ext_resource path="res://MoveLeft/MoveLeft-6.png" type="Texture" id=25]
+[ext_resource path="res://MoveLeft/MoveLeft-7.png" type="Texture" id=26]
+[ext_resource path="res://MoveLeft/MoveLeft-8.png" type="Texture" id=27]
+[ext_resource path="res://MoveLeft/MoveLeft-9.png" type="Texture" id=28]
+[ext_resource path="res://MoveLeft/MoveLeft-10.png" type="Texture" id=29]
+[ext_resource path="res://StandRight/StandRight-1.png" type="Texture" id=30]
+[ext_resource path="res://StandLeft/StandLeft-1.png" type="Texture" id=31]
+[ext_resource path="res://loop.png" type="Texture" id=32]
+[ext_resource path="res://RayCast2D.gd" type="Script" id=33]
+[ext_resource path="res://RayCast2D2.gd" type="Script" id=34]
+[ext_resource path="res://RayCast2D3.gd" type="Script" id=35]
+[ext_resource path="res://CanvasModulate.vs" type="Script" id=36]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "roll_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "jump",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 24.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "roll_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ) ],
+"loop": false,
+"name": "stand_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": false,
+"name": "stand_left",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 4.0
+height = 8.0
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 5.09902
+
+[node name="Root" type="Node" index="0"]
+
+[node name="TileMap1" type="TileMap" parent="." index="0"]
+position = Vector2( -360, 30 )
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 12, 12 )
+cell_quadrant_size = 12
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 2228252, 0, 0, 2228253, 0, 0, 2228254, 0, 0, 2228255, 0, 0, 2228256, 0, 0, 2228257, 0, 0, 2228258, 0, 0, 2228259, 0, 0, 2228260, 0, 0, 2228261, 0, 0, 2228262, 0, 0, 2228263, 0, 0, 2228264, 0, 0, 2228265, 0, 0, 2228266, 0, 0, 2228267, 0, 0, 2228268, 0, 0, 2228269, 0, 0, 2228270, 0, 0, 2228271, 0, 0, 2228272, 0, 0, 2228273, 0, 0, 2228274, 0, 0, 2228275, 0, 0, 2228276, 0, 0, 2228277, 0, 0, 2228278, 0, 0, 2228279, 0, 0, 2228280, 0, 0, 2228281, 0, 0, 2228282, 0, 0, 2228283, 0, 0, 2228284, 0, 0, 2228285, 0, 0, 2228286, 0, 0, 2228287, 0, 0, 2228288, 0, 0, 2228289, 0, 0, 2228290, 0, 0, 2228291, 0, 0, 2228292, 0, 0, 2228293, 0, 0, 2228294, 0, 0, 2228295, 0, 0, 2228296, 0, 0, 2228297, 0, 0, 2228298, 0, 0, 2228299, 0, 0, 2228300, 0, 0, 2228301, 0, 0, 2293788, 0, 0, 2293789, 0, 0, 2293790, 0, 0, 2293791, 0, 0, 2293792, 0, 0, 2293793, 0, 0, 2293794, 0, 0, 2293795, 0, 0, 2293796, 0, 0, 2293797, 0, 0, 2293798, 0, 0, 2293799, 0, 0, 2293800, 0, 0, 2293801, 0, 0, 2293802, 0, 0, 2293803, 0, 0, 2293804, 0, 0, 2293805, 0, 0, 2293806, 0, 0, 2293807, 0, 0, 2293808, 0, 0, 2293809, 0, 0, 2293810, 0, 0, 2293811, 0, 0, 2293812, 0, 0, 2293813, 0, 0, 2293814, 0, 0, 2293815, 0, 0, 2293816, 0, 0, 2293817, 0, 0, 2293818, 0, 0, 2293819, 0, 0, 2293820, 0, 0, 2293821, 0, 0, 2293822, 0, 0, 2293823, 0, 0, 2293824, 0, 0, 2293825, 0, 0, 2293826, 0, 0, 2293827, 0, 0, 2293828, 0, 0, 2293829, 0, 0, 2293830, 0, 0, 2293831, 0, 0, 2293832, 0, 0, 2293833, 0, 0, 2293834, 0, 0, 2293835, 0, 0, 2293836, 0, 0, 2293837, 0, 0 )
+_sections_unfolded = [ "Cell", "Collision", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" type="KinematicBody2D" parent="." index="1"]
+position = Vector2( 320, 417 )
+z_index = 1
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.1
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision", "Transform", "Z Index", "collision" ]
+speed = 100.0
+gravity = null
+
+[node name="Sprite" type="AnimatedSprite" parent="Player" index="0"]
+position = Vector2( 0, 5 )
+scale = Vector2( 0.25, 0.4 )
+frames = SubResource( 1 )
+animation = "stand_left"
+playing = true
+_sections_unfolded = [ "Animation", "Region", "Transform", "frames", "texture" ]
+
+[node name="Capsule" type="CollisionShape2D" parent="Player" index="1"]
+position = Vector2( 0, 5 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "shape" ]
+
+[node name="Camera2D" type="Camera2D" parent="Player" index="2"]
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.25, 0.25 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Limit", "Smoothing" ]
+
+[node name="Circle" type="CollisionShape2D" parent="Player" index="3"]
+position = Vector2( 0, 5 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="RightSensor" type="RayCast2D" parent="Player" index="4"]
+position = Vector2( 1, 9 )
+scale = Vector2( 0.1, 1 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 7
+_sections_unfolded = [ "Transform" ]
+
+[node name="LeftSensor" type="RayCast2D" parent="Player" index="5"]
+position = Vector2( -1, 9 )
+scale = Vector2( 0.1, 1 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 7
+_sections_unfolded = [ "Transform" ]
+
+[node name="Loop" type="Sprite" parent="." index="2"]
+position = Vector2( 381.5, 415 )
+scale = Vector2( 0.378906, 0.382813 )
+texture = ExtResource( 32 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Loop" index="0"]
+input_pickable = false
+collision_layer = 2
+collision_mask = 2
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Loop/StaticBody2D" index="0"]
+position = Vector2( 3.9588, 0 )
+build_mode = 0
+polygon = PoolVector2Array( 60.7011, 65.306, 121.402, 2.6123, 63.3403, 10.449, 60.7011, 15.6735, 55.4227, 23.5103, 50.1443, 28.7347, 34.3093, 41.7959, 10.5567, 52.2449, -13.1959, 54.8571, -31.6702, 57.4694, -60.7011, 60.0815, -105.567, 62.6938 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Loop" index="1"]
+position = Vector2( 1.31958, 0 )
+input_pickable = false
+collision_layer = 4
+collision_mask = 4
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Loop/StaticBody2D2" index="0"]
+build_mode = 0
+polygon = PoolVector2Array( -65.9794, 13.0613, -37.4633, 41.2902, 9.36597, 60.559, 68.6831, 63.3116, -79.1753, 62.6938, -78.0487, 38.5375, -110.845, 15.6735 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="RayCast2D" type="RayCast2D" parent="Loop" index="2"]
+position = Vector2( 1.32031, -109.714 )
+scale = Vector2( 0.1, 1 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 50 )
+collision_mask = 6
+script = ExtResource( 33 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="RayCast2D2" type="RayCast2D" parent="Loop" index="3"]
+position = Vector2( -112.165, 26.1224 )
+scale = Vector2( 0.1, 1 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 30 )
+collision_mask = 3
+script = ExtResource( 34 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="RayCast2D3" type="RayCast2D" parent="Loop" index="4"]
+position = Vector2( 109.526, 26.1224 )
+scale = Vector2( 0.1, 1 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 30 )
+collision_mask = 5
+script = ExtResource( 35 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Loop" index="5"]
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Loop/StaticBody2D3" index="0"]
+build_mode = 0
+polygon = PoolVector2Array( -109.526, 15.6735, -64.6598, 13.0613, -77.8557, -15.6733, -77.8557, -44.4081, -69.9382, -67.9182, -62.0206, -83.5917, -43.5464, -99.2651, -25.0721, -104.49, -11.8763, -109.714, 14.5155, -109.714, 27.7114, -104.49, 48.8248, -94.0406, 69.9382, -70.5305, 75.2166, -49.6326, 77.8557, -28.7346, 75.2166, -7.83667, 67.2991, 10.449, 125.361, 2.6123, 128, -117.551, 128, -128, -128, -128, -128, -114.939, -128, -80.9794, -109.526, -62.6937 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="3"]
+color = Color( 1, 1, 1, 1 )
+script = ExtResource( 36 )
+
