@@ -23,6 +23,8 @@ func _ready():
 
 func get_input():
 	isground = $LeftSensor.is_colliding() and $RightSensor.is_colliding()
+	if isjumping and isground:
+		isjumping = false
 	invelocity = Vector2()
 	if Input.is_action_pressed('ui_right'):
 		direction = FacingDir.Right
@@ -32,10 +34,11 @@ func get_input():
 		invelocity.x -= 1
 	if Input.is_action_pressed('jump') and isground:
 		isjumping = true
-	var vx = clamp(invelocity.x*speed*cos(rotation), -500,500)
-	var vy = clamp(invelocity.x*speed*sin(rotation),-500,500)
-	velocity.x += vx
-	velocity.y += vy
+	if inslope: 
+		velocity.x += invelocity.x*speed*cos(rotation)
+		velocity.y += invelocity.x*speed*sin(rotation)
+	else:
+		velocity.x += invelocity.x*speed
 	
 
 
@@ -48,19 +51,18 @@ func switch_collision_shape(disableval):
 func _physics_process(dt):
 	acceleration = Vector2()
 	get_input()
-	gravity = 9.8*20 
+	gravity = 9.8*80 
 	velocity += velocity.rotated(rotation)*dt
 	var pos = global_transform.origin
 	if isjumping and isground:
 		velocity = normal * 350
-	if isjumping and isground:
-		isjumping = false
 	if inslope:
 		acceleration += -normal*gravity
 		acceleration += Vector2(0,gravity)
 	else:
 		pass
-	
+	if velocity.y > 0 and not isground:
+		acceleration += Vector2(0,gravity)
 	acceleration += Vector2(0,gravity)
 	
 	velocity += acceleration * dt
@@ -69,6 +71,8 @@ func _physics_process(dt):
 	else:
 		velocity *= 0.75
 		normal = Vector2(0,-1)
+	velocity.x = clamp(velocity.x,-300,300)
+	velocity.y = clamp(velocity.y,-300,300)
 	var collisioninfo = move_and_collide(velocity * dt)
 	var collisioncount = 0
 	while collisioninfo and collisioninfo.remainder.length() > 0.001 and collisioncount < 10: 
@@ -77,8 +81,6 @@ func _physics_process(dt):
 		collisioninfo = move_and_collide(collisioninfo.remainder)
 	var angle = -normal.angle_to(Vector2(0,-1))
 	rotation = angle
-	if isjumping and velocity.y > 0:
-		isjumping = false
 	if !isground and isjumping:
 		$Sprite.play("jump")
 		$Sprite.scale = circledim
